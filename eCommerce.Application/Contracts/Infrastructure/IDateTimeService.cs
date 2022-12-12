@@ -2,6 +2,9 @@
 {
     public interface IDateTimeService
     {
+        /// <summary>
+        /// Get current system date
+        /// </summary>
         DateTime Now { get; }
     }
 }
