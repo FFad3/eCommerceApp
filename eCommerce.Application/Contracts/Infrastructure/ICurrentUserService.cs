@@ -2,6 +2,6 @@
 {
     public interface ICurrentUserService
     {
-        Task<string?> CurrentUser { get; }
+        string CurrentUser();
     }
 }
