@@ -10,10 +10,10 @@ namespace eCommerce.Persistence.Repositories.Base
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<TEntity> _db;
 
-        protected BaseRepository(ApplicationDbContext dbContext, DbSet<TEntity> db)
+        protected BaseRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _db = db;
+            _db = _dbContext.Set<TEntity>();
         }
 
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
