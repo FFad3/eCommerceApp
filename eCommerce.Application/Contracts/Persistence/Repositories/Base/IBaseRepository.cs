@@ -17,7 +17,7 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken);
 
         /// <summary>
         /// Remove specific element
@@ -25,7 +25,7 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task RemoveAsync(TEntity entity, CancellationToken cancellationToken);
+        Task Remove(TEntity entity);
 
         /// <summary>
         /// Update specific element
@@ -33,7 +33,7 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UpdateAsync(TEntity entity, CancellationToken cancellationToken);
+        Task Update(TEntity entity);
 
         /// <summary>
         /// Returns count of elemts
@@ -61,13 +61,13 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<TEntity?> FindAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+        Task<IEnumerable<TEntity?>> FindAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
         /// <summary>
         /// Returns dbset as IQuerable
         /// </summary>
         /// <returns></returns>
-        Task<IQueryable<TEntity>> AsIQuerable();
+        IQueryable<TEntity> AsIQuerable();
 
         /// <summary>
         /// Check if given field is unique
