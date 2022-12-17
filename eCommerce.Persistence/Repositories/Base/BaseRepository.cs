@@ -1,4 +1,5 @@
 ﻿using eCommerce.Application.Contracts.Persistence.Repositories.Base;
+using eCommerce.Domain.Common;
 using eCommerce.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -59,9 +60,9 @@ namespace eCommerce.Persistence.Repositories.Base
             return entity is null;
         }
 
-        public Task Remove(TEntity entity)
+        public Task Remove(AuditableEntity entity)
         {
-            _db.Remove(entity);
+            entity.IsRemoved = true;
             return Task.CompletedTask;
         }
 

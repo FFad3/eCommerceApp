@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using eCommerce.Domain.Common;
+using System.Linq.Expressions;
 
 namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
 {
@@ -25,7 +26,7 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task Remove(TEntity entity);
+        Task Remove(AuditableEntity entity);
 
         /// <summary>
         /// Update specific element
