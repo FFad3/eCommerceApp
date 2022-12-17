@@ -6,11 +6,6 @@ namespace eCommerce.Application.Features.Commands
 {
     public class CreateCategoryCommand : IRequest<int>, IMapTo<Category>
     {
-        public CreateCategoryCommand(string name)
-        {
-            Name = name;
-        }
-
-        public string Name { get; set; }
+        public string Name { get; set; } = String.Empty;
     }
 }

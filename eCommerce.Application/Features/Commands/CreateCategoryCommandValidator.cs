@@ -12,9 +12,9 @@ namespace eCommerce.Application.Features.Commands
             _repo = repo;
 
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("{PropertyName} is required")
-                .MaximumLength(100).WithMessage("{PropertyName} must not exceed 100 characters")
-                .MustAsync(IsNameUnique);
+                .NotEmpty().WithMessage("is null or empty string")
+                .MaximumLength(100).WithMessage("must not exceed 100 characters")
+                .MustAsync(IsNameUnique).WithMessage("must be unique");
         }
 
         private async Task<bool> IsNameUnique(string name, CancellationToken cancellationToken) =>
