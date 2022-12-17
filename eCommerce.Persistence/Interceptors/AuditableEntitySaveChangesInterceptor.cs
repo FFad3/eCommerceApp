@@ -2,6 +2,7 @@
 using eCommerce.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Persistence.Interceptors
 {
@@ -35,17 +36,15 @@ namespace eCommerce.Persistence.Interceptors
             if (context is null) return;
             var changedEntities = context.ChangeTracker.Entries<AuditableEntity>().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-            var currentUser = _currentUserService.CurrentUser();
-
             foreach (var entry in changedEntities)
             {
                 entry.Entity.LastModifiedDate = _dateTimeService.Now;
-                entry.Entity.LastModifiedBy = String.IsNullOrEmpty(currentUser) ? "UNKNOWN" : currentUser;
+                entry.Entity.LastModifiedBy = _currentUserService.UserId ?? "UNKNOWN";
 
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedDate = _dateTimeService.Now;
-                    entry.Entity.CreatedBy = String.IsNullOrEmpty(currentUser) ? "UNKNOWN" : currentUser;
+                    entry.Entity.CreatedBy = _currentUserService.UserId ?? "UNKNOWN";
                 }
             }
         }
