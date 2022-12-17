@@ -1,5 +1,4 @@
 ﻿using eCommerce.Domain.Common;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eCommerce.Domain.Entities
@@ -16,6 +15,6 @@ namespace eCommerce.Domain.Entities
 
         public Guid UserId { get; set; }
 
-        public virtual IList<BasketItem> Items { get; set; }
+        public ICollection<BasketItem> Items { get; set; }
     }
 }

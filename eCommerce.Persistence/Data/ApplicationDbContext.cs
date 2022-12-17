@@ -28,6 +28,13 @@ namespace eCommerce.Persistence.Data
             base.OnConfiguring(optionsBuilder);
         }
 
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            base.ConfigureConventions(configurationBuilder);
+            configurationBuilder.Properties<string>().HaveColumnType("nvarchar(200)");
+            configurationBuilder.Properties<decimal>().HavePrecision(14, 2);
+        }
+
         #region DbSets
 
         public DbSet<Category> Categories { get; set; }

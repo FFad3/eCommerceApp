@@ -12,7 +12,7 @@ namespace eCommerce.Domain.Entities
         }
 
         public int Id { get; set; }
-        public virtual IList<OrderItem> Items { get; set; }
+        public ICollection<OrderItem> Items { get; set; }
 
         public DateTime OrderDate { get; set; }
 
