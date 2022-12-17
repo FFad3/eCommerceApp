@@ -17,7 +17,7 @@ namespace eCommerce.Persistence
             services.AddScoped<AuditableEntitySaveChangesInterceptor>();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString(""));
+                options.UseSqlServer(configuration.GetConnectionString("eCommerceDb"));
             });
 
             #endregion dbContext
