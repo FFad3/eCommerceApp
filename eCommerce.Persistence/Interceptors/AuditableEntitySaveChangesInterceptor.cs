@@ -30,20 +30,22 @@ namespace eCommerce.Persistence.Interceptors
             return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
-        public async void UpdateEntities(DbContext? context)
+        public void UpdateEntities(DbContext? context)
         {
             if (context is null) return;
             var changedEntities = context.ChangeTracker.Entries<AuditableEntity>().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
+            var currentUser = _currentUserService.CurrentUser();
+
             foreach (var entry in changedEntities)
             {
                 entry.Entity.LastModifiedDate = _dateTimeService.Now;
-                entry.Entity.LastModifiedBy = await _currentUserService.CurrentUser ?? "UNKNOWN";
+                entry.Entity.LastModifiedBy = String.IsNullOrEmpty(currentUser) ? "UNKNOWN" : currentUser;
 
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedDate = _dateTimeService.Now;
-                    entry.Entity.CreatedBy = await _currentUserService.CurrentUser ?? "UNKNOWN";
+                    entry.Entity.CreatedBy = String.IsNullOrEmpty(currentUser) ? "UNKNOWN" : currentUser;
                 }
             }
         }

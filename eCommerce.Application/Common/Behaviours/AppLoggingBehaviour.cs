@@ -20,7 +20,7 @@ namespace eCommerce.Application.Common.Behaviours
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             var requestType = typeof(TRequest);
-            var currentUser = await _currentUserService.CurrentUser;
+            var currentUser = _currentUserService.CurrentUser;
             var requestName = requestType.Name;
             var requestId = requestType.GUID;
             var requestJson = JsonSerializer.Serialize(request);
