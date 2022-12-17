@@ -17,12 +17,13 @@ namespace eCommerce.Application
         {
             var asm = Assembly.GetExecutingAssembly();
             services.AddMediatR(asm);
-            //Pipeline config
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AppLoggingBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehaviour<,>));
-            //
             services.AddAutoMapper(asm);
             services.AddValidatorsFromAssembly(asm);
+            //Pipeline config
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PereformenceBehaviour<,>));
+            //
             return services;
         }
     }
