@@ -62,7 +62,7 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IEnumerable<TEntity?>> FindAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+        Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
         /// <summary>
         /// Returns dbset as IQuerable

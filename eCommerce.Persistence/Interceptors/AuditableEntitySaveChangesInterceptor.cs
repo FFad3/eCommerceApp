@@ -39,12 +39,12 @@ namespace eCommerce.Persistence.Interceptors
             foreach (var entry in changedEntities)
             {
                 entry.Entity.LastModifiedDate = _dateTimeService.Now;
-                entry.Entity.LastModifiedBy = _currentUserService.UserId ?? "UNKNOWN";
+                entry.Entity.LastModifiedBy = _currentUserService.UserId;
 
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedDate = _dateTimeService.Now;
-                    entry.Entity.CreatedBy = _currentUserService.UserId ?? "UNKNOWN";
+                    entry.Entity.CreatedBy = _currentUserService.UserId;
                 }
             }
         }

@@ -13,6 +13,6 @@ namespace eCommerce.Api.Services
             _contextAccessor = contextAccessor;
         }
 
-        public string? UserId => _contextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        public string UserId => _contextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? "UNKNOWN";
     }
 }

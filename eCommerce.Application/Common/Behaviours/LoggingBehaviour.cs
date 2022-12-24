@@ -21,12 +21,12 @@ namespace eCommerce.Application.Common.Behaviours
             var userId = _currentUserService.UserId;
             string userName = string.Empty;
 
-            if (!string.IsNullOrEmpty(userId))
-            {
-                throw new NotImplementedException("Add implementation of getting username");
-            }
-            _logger.LogInformation("Request: {Name} {@UserId} {@UserName} {@Request}",
-            requestName, userId, userName, request);
+            //if (!string.IsNullOrEmpty(userId))
+            //{
+            //    throw new NotImplementedException("Add implementation of getting username");
+            //}
+            _logger.LogInformation("UserId:{@userId}> Request:{@requestName}  Payload:{@Request}",
+            requestName, userId, request);
             return Task.CompletedTask;
         }
     }

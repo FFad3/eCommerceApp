@@ -2,6 +2,7 @@
 using eCommerce.Domain.Common;
 using eCommerce.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace eCommerce.Persistence.Repositories.Base
@@ -44,7 +45,7 @@ namespace eCommerce.Persistence.Repositories.Base
             return await _db.CountAsync(predicate, cancellationToken);
         }
 
-        public async Task<IEnumerable<TEntity?>> FindAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
         {
             return await _db.Where(predicate).ToListAsync(cancellationToken);
         }
