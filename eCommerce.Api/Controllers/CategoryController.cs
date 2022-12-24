@@ -1,7 +1,9 @@
 ﻿using eCommerce.Application.Features.Commands;
+using eCommerce.Application.Features.Queries;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace eCommerce.Api.Controllers
 {
@@ -19,18 +21,32 @@ namespace eCommerce.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(CreateCategoryCommand command)
+        public async Task<ActionResult<int>> Post([FromBody] CreateCategoryCommand command)
         {
-            _logger.LogInformation("halko");
-            try
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get(int id)
+        {
+            var result = await _mediator.Send(new GetCategoryQuery { id = id });
+            if (result is null)
             {
-                var result = await _mediator.Send(command);
-                return Ok(result);
+                return NoContent();
             }
-            catch (Exception ex)
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Get([FromQuery] GetCategoryPageQuery query)
+        {
+            var result = await _mediator.Send(query);
+            if (result is null)
             {
-                return BadRequest(ex.Message);
+                return NoContent();
             }
+            return Ok(result);
         }
     }
 }
