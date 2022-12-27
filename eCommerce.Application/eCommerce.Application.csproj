@@ -19,4 +19,8 @@
     <ProjectReference Include="..\eCommerce.Domain\eCommerce.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Exceptions\" />
+  </ItemGroup>
+
 </Project>

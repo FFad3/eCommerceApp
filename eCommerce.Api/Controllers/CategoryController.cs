@@ -26,16 +26,8 @@ namespace eCommerce.Api.Controllers
         [SwaggerOperation(Summary = "Creates new category")]
         public async Task<ActionResult<int>> Post(CreateCategoryCommand command)
         {
-            try
-            {
-                var result = await _mediator.Send(command);
-                return Ok(result);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-                throw;
-            }
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -65,9 +57,14 @@ namespace eCommerce.Api.Controllers
 
         [HttpPatch]
         [SwaggerOperation(Summary = "Update specific category with given Id")]
-        public async Task<ActionResult> Update()
+        public async Task<ActionResult> Update(UpdateCategoryCommand command)
         {
-            return Ok(new NotImplementedException("WIP"));
+            var result = await _mediator.Send(command);
+            if (result is null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
         [HttpGet]
