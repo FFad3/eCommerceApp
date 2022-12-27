@@ -1,13 +1,14 @@
 ﻿using eCommerce.Application.DTOs.Common;
 using eCommerce.Domain.Entities;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace eCommerce.Application.Features.Queries
 {
     public class GetCategoryPageQuery : IRequest<PaginatedList<Category>>
     {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 20;
+        public int Page { get; set; } = 1;
+
+        public int Size { get; set; } = 20;
     }
 }

@@ -25,8 +25,8 @@ namespace eCommerce.Application.Common.Behaviours
             //{
             //    throw new NotImplementedException("Add implementation of getting username");
             //}
-            _logger.LogInformation("UserId:{@userId}> Request:{@requestName}  Payload:{@Request}",
-            requestName, userId, request);
+            _logger.LogInformation("UserId:{@userId} > Request:{@requestName}  Payload:{@Request}",
+            userId, requestName, request);
             return Task.CompletedTask;
         }
     }

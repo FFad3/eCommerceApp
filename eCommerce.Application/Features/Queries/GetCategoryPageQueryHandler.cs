@@ -4,22 +4,27 @@ using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Application.DTOs.Common;
 using eCommerce.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Application.Features.Queries
 {
     public class GetCategoryPageQueryHandler : IRequestHandler<GetCategoryPageQuery, PaginatedList<Category>>
     {
         private readonly ICategoryRepository _repo;
+        private readonly ILogger<GetCategoryPageQueryHandler> _logger;
 
-        public GetCategoryPageQueryHandler(ICategoryRepository repo)
+        public GetCategoryPageQueryHandler(ICategoryRepository repo, ILogger<GetCategoryPageQueryHandler> logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
         public async Task<PaginatedList<Category>> Handle(GetCategoryPageQuery request, CancellationToken cancellationToken)
         {
             var result = await _repo.AsIQuerable()
-                .PaginatedListAsync(request.PageNumber, request.PageSize, cancellationToken);
+                .OrderBy(x => x.Id)
+                .PaginatedListAsync(request.Page, request.Size, cancellationToken);
+            _logger.LogInformation("Get {@itemsCount} Categories from {@page}/{@totalPages} page", result.Items.Count(), result.PageNumber, result.TotalPages);
             return result;
         }
     }

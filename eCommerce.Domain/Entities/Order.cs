@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using eCommerce.Domain.Common;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eCommerce.Domain.Entities
 {
     [Table("Orders")]
-    public class Order
+    public class Order : AuditableEntity, IEntityBase
     {
         public Order()
         {

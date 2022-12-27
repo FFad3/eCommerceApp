@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace eCommerce.Domain.Entities
 {
     [Table("OrderItems")]
-    public class OrderItem : AuditableEntity
+    public class OrderItem : AuditableEntity, IEntityBase
     {
         public int Id { get; set; }
 
