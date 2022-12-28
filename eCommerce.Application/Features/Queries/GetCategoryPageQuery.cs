@@ -1,11 +1,10 @@
-﻿using eCommerce.Application.DTOs.Common;
-using eCommerce.Domain.Entities;
+﻿using eCommerce.Application.DTOs.CategoryDtos;
+using eCommerce.Application.DTOs.Common;
 using MediatR;
-using System.ComponentModel;
 
 namespace eCommerce.Application.Features.Queries
 {
-    public class GetCategoryPageQuery : IRequest<PaginatedList<Category>>
+    public class GetCategoryPageQuery : IRequest<PaginatedList<CategoryDto>>
     {
         public int Page { get; set; } = 1;
 
