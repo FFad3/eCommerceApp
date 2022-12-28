@@ -25,6 +25,7 @@ namespace eCommerce.Persistence
             #region Repos
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             #endregion Repos
 
