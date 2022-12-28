@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using eCommerce.Application.Common.Extensions;
 using eCommerce.Application.Common.Mappings;
 using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Application.DTOs.CategoryDtos;
@@ -25,7 +26,7 @@ namespace eCommerce.Application.Features.Queries
         public async Task<PaginatedList<CategoryDto>> Handle(GetCategoryPageQuery request, CancellationToken cancellationToken)
         {
             var result = await _repo.AsIQuerable()
-                .OrderBy(x => x.Id)
+                .ApplySort(request.SortStr)
                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.Page, request.Size, cancellationToken);
             _logger.LogInformation("Get {@itemsCount} Categories from {@page}/{@totalPages} page", result.Items.Count(), result.PageNumber, result.TotalPages);

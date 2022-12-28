@@ -9,5 +9,6 @@ namespace eCommerce.Application.Features.Queries
         public int Page { get; set; } = 1;
 
         public int Size { get; set; } = 20;
+        public string? SortStr { get; set; }
     }
 }
