@@ -1,9 +1,8 @@
-﻿using eCommerce.Application.Contracts.Persistence.Repositories.Base;
-using eCommerce.Domain.Entities;
+﻿using eCommerce.Domain.Entities;
 
 namespace eCommerce.Application.Contracts.Persistence.Repositories
 {
-    public interface IBasketRepository : IBaseRepository<Basket>
+    public interface IBasketRepository : IGenericRepository<Basket>
     {
     }
 }

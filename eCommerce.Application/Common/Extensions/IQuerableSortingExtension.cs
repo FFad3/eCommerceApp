@@ -6,7 +6,6 @@ namespace eCommerce.Application.Common.Extensions
     public static class IQuerableSortingExtension
     {
         public static IQueryable<T> ApplySort<T>(this IQueryable<T> source, string? sortStr)
-            where T : IEntityBase
         {
             var filters = GetFilters(typeof(T));
 
@@ -16,11 +15,11 @@ namespace eCommerce.Application.Common.Extensions
             }
             if (filters is null)
             {
-                throw new ArgumentNullException(nameof(filters), "avaiable filters are empty");
+                throw new ArgumentNullException(nameof(filters), "no avaiable filters");
             }
             if (string.IsNullOrEmpty(sortStr))
             {
-                return source.OrderBy(x => x.Id);
+                return source.OrderBy("Id");
             }
 
             var sortStringArray = sortStr.Split(',');
@@ -55,7 +54,7 @@ namespace eCommerce.Application.Common.Extensions
         private static HashSet<string>? GetFilters(Type type)
         {
             var result = type.GetProperties()
-                            .Where(x => typeof(AuditableEntity).GetProperty(x.Name) is null)
+                            .Where(x => typeof(EntityBase).GetProperty(x.Name) is null || x.Name == "Id")
                             .Select(x => x.Name)
                             .ToHashSet();
 

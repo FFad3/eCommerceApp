@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace eCommerce.Domain.Entities
 {
     [Table("BasketItems")]
-    public class BasketItem : AuditableEntity, IEntityBase
+    public class BasketItem : EntityBase
     {
-        public int Id { get; set; }
-
         public int BastekId { get; set; }
         public Basket Basket { get; set; } = null!;
 

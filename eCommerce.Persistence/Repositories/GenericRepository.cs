@@ -1,18 +1,17 @@
-﻿using eCommerce.Application.Contracts.Persistence.Repositories.Base;
+﻿using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Domain.Common;
 using eCommerce.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Linq.Expressions;
 
-namespace eCommerce.Persistence.Repositories.Base
+namespace eCommerce.Persistence.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<TEntity> _db;
 
-        protected BaseRepository(ApplicationDbContext dbContext)
+        protected GenericRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
             _db = _dbContext.Set<TEntity>();
@@ -61,7 +60,7 @@ namespace eCommerce.Persistence.Repositories.Base
             return entity is null;
         }
 
-        public Task Remove(AuditableEntity entity)
+        public Task Remove(EntityBase entity)
         {
             entity.IsRemoved = true;
             return Task.CompletedTask;

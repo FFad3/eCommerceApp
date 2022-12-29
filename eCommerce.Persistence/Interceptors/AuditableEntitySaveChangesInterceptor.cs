@@ -2,7 +2,6 @@
 using eCommerce.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Persistence.Interceptors
 {
@@ -34,7 +33,9 @@ namespace eCommerce.Persistence.Interceptors
         public void UpdateEntities(DbContext? context)
         {
             if (context is null) return;
-            var changedEntities = context.ChangeTracker.Entries<AuditableEntity>().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+
+            var changedEntities = context.ChangeTracker.Entries<EntityBase>()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
             foreach (var entry in changedEntities)
             {

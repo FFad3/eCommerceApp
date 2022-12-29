@@ -29,7 +29,7 @@ namespace eCommerce.Application.Features.Queries
                 .ApplySort(request.SortStr)
                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.Page, request.Size, cancellationToken);
-            _logger.LogInformation("Get {@itemsCount} Categories from {@page}/{@totalPages} page", result.Items.Count(), result.PageNumber, result.TotalPages);
+            _logger.LogInformation("Get {@itemsCount} Categories from {@page}/{@totalPages} page Sorting:{@sorting}", result.Items.Count(), result.PageNumber, result.TotalPages, request.SortStr);
             return result;
         }
     }

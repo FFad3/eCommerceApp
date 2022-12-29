@@ -1,9 +1,9 @@
 ﻿using eCommerce.Domain.Common;
 using System.Linq.Expressions;
 
-namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
+namespace eCommerce.Application.Contracts.Persistence.Repositories
 {
-    public interface IBaseRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// Add single element
@@ -26,7 +26,7 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories.Base
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task Remove(AuditableEntity entity);
+        Task Remove(EntityBase entity);
 
         /// <summary>
         /// Update specific element

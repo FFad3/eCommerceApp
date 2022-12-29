@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace eCommerce.Domain.Entities
 {
     [Table("Products")]
-    public class Product : AuditableEntity, IEntityBase
+    public class Product : EntityBase
     {
-        public int Id { get; set; }
-
         public string Name { get; set; } = null!;
 
         public int CategoryId { get; set; }

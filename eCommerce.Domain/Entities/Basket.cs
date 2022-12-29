@@ -4,14 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace eCommerce.Domain.Entities
 {
     [Table("Baskets")]
-    public class Basket : AuditableEntity, IEntityBase
+    public class Basket : EntityBase
     {
         public Basket()
         {
             Items = new List<BasketItem>();
         }
-
-        public int Id { get; set; }
 
         public Guid UserId { get; set; }
 

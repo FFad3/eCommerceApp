@@ -4,14 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace eCommerce.Domain.Entities
 {
     [Table("Orders")]
-    public class Order : AuditableEntity, IEntityBase
+    public class Order : EntityBase
     {
         public Order()
         {
             Items = new List<OrderItem>();
         }
 
-        public int Id { get; set; }
         public ICollection<OrderItem> Items { get; set; }
 
         public DateTime OrderDate { get; set; }
