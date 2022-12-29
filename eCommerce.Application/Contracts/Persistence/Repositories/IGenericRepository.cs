@@ -21,12 +21,12 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories
         Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Remove specific element
+        /// Change field isRemoved to true
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task Remove(EntityBase entity);
+        Task Remove(TEntity entity, bool hardRemove = false);
 
         /// <summary>
         /// Update specific element

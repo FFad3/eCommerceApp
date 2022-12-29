@@ -23,8 +23,7 @@ namespace eCommerce.Application.Features.Commands
                 _logger.LogInformation("Failed to remove cateogory Id:{@id}", request.Id);
                 return false;
             }
-            obj.IsRemoved = true;
-            await _repo.Update(obj);
+            await _repo.Remove(obj);
             return await _repo.SaveChangesAsync(cancellationToken);
         }
     }

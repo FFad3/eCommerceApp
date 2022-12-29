@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace eCommerce.Persistence.Repositories
 {
-    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : EntityBase
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<TEntity> _db;
@@ -60,9 +60,16 @@ namespace eCommerce.Persistence.Repositories
             return entity is null;
         }
 
-        public Task Remove(EntityBase entity)
+        public Task Remove(TEntity entity, bool hardRemove = false)
         {
-            entity.IsRemoved = true;
+            if (hardRemove)
+            {
+                _db.Remove(entity);
+            }
+            else
+            {
+                entity.IsRemoved = true;
+            }
             return Task.CompletedTask;
         }
 

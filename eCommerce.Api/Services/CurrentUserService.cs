@@ -1,6 +1,5 @@
 ﻿using eCommerce.Application.Contracts.Infrastructure;
 using System.Security.Claims;
-using System.Text.Json;
 
 namespace eCommerce.Api.Services
 {
