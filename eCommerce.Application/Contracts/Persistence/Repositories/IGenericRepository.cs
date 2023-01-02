@@ -77,12 +77,5 @@ namespace eCommerce.Application.Contracts.Persistence.Repositories
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<bool> IsUnique(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Save DbContextChanges
-        /// </summary>
-        /// <param name="cancellation"></param>
-        /// <returns></returns>
-        Task<bool> SaveChangesAsync(CancellationToken cancellation);
     }
 }

@@ -1,4 +1,5 @@
-﻿using eCommerce.Application.Contracts.Persistence.Repositories;
+﻿using eCommerce.Application.Contracts.Persistence;
+using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Persistence.Data;
 using eCommerce.Persistence.Interceptors;
 using eCommerce.Persistence.Repositories;
@@ -26,6 +27,7 @@ namespace eCommerce.Persistence
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             #endregion Repos
 

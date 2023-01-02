@@ -73,11 +73,6 @@ namespace eCommerce.Persistence.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<bool> SaveChangesAsync(CancellationToken cancellation)
-        {
-            return await _dbContext.SaveChangesAsync(cancellation) > 0;
-        }
-
         public Task Update(TEntity entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
