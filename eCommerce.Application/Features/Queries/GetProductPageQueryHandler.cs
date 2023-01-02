@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Application.Features.Queries
 {
-    public class GetProductPageQueryHandler : IRequestHandler<GetProductPageQuery, PaginatedList<Product>>
+    public class GetProductPageQueryHandler : IRequestHandler<GetPaginationResult<Product>, PaginatedList<Product>>
     {
         private readonly ILogger<GetProductPageQueryHandler> _logger;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace eCommerce.Application.Features.Queries
             _repo = repo;
         }
 
-        public async Task<PaginatedList<Product>> Handle(GetProductPageQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedList<Product>> Handle(GetPaginationResult<Product> request, CancellationToken cancellationToken)
         {
             var result = await _repo.AsIQuerable()
                 .ApplySort(request.SortStr)

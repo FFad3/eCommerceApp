@@ -9,7 +9,7 @@ namespace eCommerce.Persistence.Repositories
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : EntityBase
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly DbSet<TEntity> _db;
+        protected readonly DbSet<TEntity> _db;
 
         protected GenericRepository(ApplicationDbContext dbContext)
         {

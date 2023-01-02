@@ -1,4 +1,5 @@
-﻿using eCommerce.Application.Features.Commands;
+﻿using eCommerce.Application.DTOs.CategoryDtos;
+using eCommerce.Application.Features.Commands;
 using eCommerce.Application.Features.Queries;
 using FluentValidation;
 using MediatR;
@@ -69,7 +70,7 @@ namespace eCommerce.Api.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Get paginated result")]
-        public async Task<ActionResult> Get([FromQuery] GetCategoryPageQuery query)
+        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<CategoryDto> query)
         {
             var result = await _mediator.Send(query);
             if (result is null)

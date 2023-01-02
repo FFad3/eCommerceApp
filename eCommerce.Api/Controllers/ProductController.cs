@@ -1,5 +1,6 @@
 ﻿using eCommerce.Application.Features.Commands;
 using eCommerce.Application.Features.Queries;
+using eCommerce.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -29,7 +30,7 @@ namespace eCommerce.Api.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Get produucts page")]
-        public async Task<ActionResult> Get([FromQuery] GetProductPageQuery query)
+        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<Product> query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
