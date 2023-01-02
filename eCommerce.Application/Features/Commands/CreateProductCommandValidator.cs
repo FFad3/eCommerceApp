@@ -1,17 +1,20 @@
-﻿using eCommerce.Application.Contracts.Persistence.Repositories;
+﻿using eCommerce.Application.Contracts.Persistence;
+using eCommerce.Application.Contracts.Persistence.Repositories;
 using FluentValidation;
 
 namespace eCommerce.Application.Features.Commands
 {
     public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public CreateProductCommandValidator(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public CreateProductCommandValidator(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
-            _productRepository = productRepository;
+            this._unitOfWork = unitOfWork;
+            _categoryRepository = _unitOfWork.Category;
+            _productRepository = _unitOfWork.Product;
 
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("is null or empty string")

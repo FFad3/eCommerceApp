@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using eCommerce.Application.Contracts.Persistence;
 using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Domain.Entities;
 using MediatR;
@@ -8,13 +9,13 @@ namespace eCommerce.Application.Features.Commands
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
     {
-        private readonly IProductRepository _repo;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateProductCommandHandler> _logger;
 
-        public CreateProductCommandHandler(IProductRepository repo, IMapper mapper, ILogger<CreateProductCommandHandler> logger)
+        public CreateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<CreateProductCommandHandler> logger)
         {
-            _repo = repo;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }
@@ -22,8 +23,8 @@ namespace eCommerce.Application.Features.Commands
         public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var newProduct = _mapper.Map<Product>(request);
-            newProduct = await _repo.AddAsync(newProduct, cancellationToken);
-            await _repo.SaveChangesAsync(cancellationToken);
+            newProduct = await _unitOfWork.Product.AddAsync(newProduct, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Product {@newItem} saved in DB", newProduct);
             return newProduct.Id;
         }

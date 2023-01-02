@@ -6,11 +6,12 @@ using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Application.DTOs.CategoryDtos;
 using eCommerce.Application.DTOs.Common;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Application.Features.Queries
 {
-    public class GetCategoryPageQueryHandler : IRequestHandler<GetCategoryPageQuery, PaginatedList<CategoryDto>>
+    public class GetCategoryPageQueryHandler : IRequestHandler<GetPaginationResult<CategoryDto>, PaginatedList<CategoryDto>>
     {
         private readonly ICategoryRepository _repo;
         private readonly ILogger<GetCategoryPageQueryHandler> _logger;
@@ -23,9 +24,10 @@ namespace eCommerce.Application.Features.Queries
             _mapper = mapper;
         }
 
-        public async Task<PaginatedList<CategoryDto>> Handle(GetCategoryPageQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedList<CategoryDto>> Handle(GetPaginationResult<CategoryDto> request, CancellationToken cancellationToken)
         {
             var result = await _repo.AsIQuerable()
+                .Include(x => x.Products)
                 .ApplySort(request.SortStr)
                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.Page, request.Size, cancellationToken);

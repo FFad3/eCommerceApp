@@ -1,15 +1,16 @@
-﻿using eCommerce.Application.Contracts.Persistence.Repositories;
+﻿using eCommerce.Application.Contracts.Persistence;
+using eCommerce.Application.Contracts.Persistence.Repositories;
 using FluentValidation;
 
 namespace eCommerce.Application.Features.Commands
 {
     public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
     {
-        private readonly ICategoryRepository _repo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateCategoryCommandValidator(ICategoryRepository repo)
+        public UpdateCategoryCommandValidator(IUnitOfWork unitOfWork)
         {
-            _repo = repo;
+            _unitOfWork = unitOfWork;
 
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("is null or empty string")
@@ -18,6 +19,6 @@ namespace eCommerce.Application.Features.Commands
         }
 
         private async Task<bool> IsNameUnique(string name, CancellationToken cancellationToken) =>
-            await _repo.IsUnique(x => x.Name == name, cancellationToken);
+            await _unitOfWork.Category.IsUnique(x => x.Name == name, cancellationToken);
     }
 }
