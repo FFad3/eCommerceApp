@@ -12,7 +12,7 @@ namespace eCommerce.Persistence.Repositories
         {
         }
 
-        public async Task<Category?> FindCategoryAsync(Expression<Func<Category, bool>> predicate, CancellationToken cancellationToken)
+        public async Task<Category?> GetCategoryWithProductsAsync(Expression<Func<Category, bool>> predicate, CancellationToken cancellationToken)
         {
             var result = await _db.Include(x => x.Products).FirstOrDefaultAsync(predicate, cancellationToken);
             return result;

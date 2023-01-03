@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace eCommerce.Application.Contracts.Persistence.Repositories
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : EntityBase
     {
         /// <summary>
         /// Add single element
