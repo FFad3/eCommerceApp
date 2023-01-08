@@ -1,4 +1,5 @@
-﻿using eCommerce.Application.DTOs.ProductDtos;
+﻿using eCommerce.Application.DTOs.CategoryDtos;
+using eCommerce.Application.DTOs.ProductDtos;
 using eCommerce.Application.Features.Commands.ProductCommands;
 using eCommerce.Application.Features.Queries.Common;
 using eCommerce.Domain.Entities;
@@ -30,9 +31,22 @@ namespace eCommerce.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Get specific product with given Id")]
+        public async Task<ActionResult> Get(int id)
+        {
+            var query = new GetSingleItemQuery<ProductWithCategoryDto> { Id = id };
+            var result = await _mediator.Send(query);
+            if (result is null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
         [HttpGet]
         [SwaggerOperation(Summary = "Get product paggination result")]
-        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<ProductDto> query)
+        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<ProductWithCategoryDto> query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
