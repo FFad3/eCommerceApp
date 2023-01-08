@@ -1,4 +1,5 @@
 ﻿using eCommerce.Application.Common.Mappings;
+using eCommerce.Application.DTOs.CategoryDtos;
 using eCommerce.Domain.Entities;
 
 namespace eCommerce.Application.DTOs.ProductDtos
@@ -12,5 +13,6 @@ namespace eCommerce.Application.DTOs.ProductDtos
 
         public string? Description { get; set; }
         public string ImgUrl { get; set; } = string.Empty;
+        public ShortCategoryDto Category { get; set; } = default!;
     }
 }

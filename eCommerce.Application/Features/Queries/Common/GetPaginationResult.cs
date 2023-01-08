@@ -1,4 +1,5 @@
-﻿using eCommerce.Application.DTOs.Common;
+﻿using eCommerce.Application.DTOs.CategoryDtos;
+using eCommerce.Application.DTOs.Common;
 using MediatR;
 
 namespace eCommerce.Application.Features.Queries.Common

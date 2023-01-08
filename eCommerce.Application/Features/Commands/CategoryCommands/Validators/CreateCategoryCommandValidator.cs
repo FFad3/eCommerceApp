@@ -14,7 +14,7 @@ namespace eCommerce.Application.Features.Commands
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("is null or empty string")
                 .MaximumLength(100).WithMessage("must not exceed 100 characters")
-                .MustAsync(IsNameUnique).WithMessage("must be unique");
+                .MustAsync(IsNameUnique).WithMessage("must be unique or doesnt exists");
         }
 
         private async Task<bool> IsNameUnique(string name, CancellationToken cancellationToken) =>

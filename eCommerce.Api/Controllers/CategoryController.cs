@@ -33,7 +33,7 @@ namespace eCommerce.Api.Controllers
         [SwaggerOperation(Summary = "Get specific category with given Id")]
         public async Task<ActionResult> Get(int id)
         {
-            var query = new GetCategoryQuery { Id = id };
+            var query = new GetSingleItemQuery<CategoryWithProductsDto> { Id = id };
             var result = await _mediator.Send(query);
             if (result is null)
             {
@@ -67,7 +67,7 @@ namespace eCommerce.Api.Controllers
         }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Get paginated result")]
+        [SwaggerOperation(Summary = "Get all categories")]
         public async Task<ActionResult> Get()
         {
             var result = await _mediator.Send(new GetCategoriesQuery());

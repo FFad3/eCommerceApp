@@ -8,6 +8,7 @@ using eCommerce.Application.DTOs.ProductDtos;
 using eCommerce.Application.Features.Queries.Common;
 using eCommerce.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Application.Features.Queries
@@ -29,7 +30,7 @@ namespace eCommerce.Application.Features.Queries
         {
             var result = await _repo.AsIQuerable()
                 .ApplySort(request.SortStr)
-                //.OrderBy(x => x.Id)
+                .Include(x => x.Category)
                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.Page, request.Size, cancellationToken);
             _logger.LogInformation("Get {@itemsCount} Categories from {@page}/{@totalPages} page", result.Items.Count(), result.PageNumber, result.TotalPages);

@@ -18,6 +18,6 @@ namespace eCommerce.Application.Features.Commands
         }
 
         private async Task<bool> IsNameUnique(string name, CancellationToken cancellationToken) =>
-            await _unitOfWork.Category.IsUnique(x => x.Name == name, cancellationToken);
+            await _unitOfWork.Category.IsUnique(x => x.Name == name && !x.IsRemoved, cancellationToken);
     }
 }
