@@ -37,7 +37,7 @@ namespace eCommerce.Api.Controllers
             var result = await _mediator.Send(query);
             if (result is null)
             {
-                return NoContent();
+                return NotFound();
             }
             return Ok(result);
         }
