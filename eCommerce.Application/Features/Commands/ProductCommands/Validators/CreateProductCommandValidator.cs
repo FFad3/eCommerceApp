@@ -24,7 +24,7 @@ namespace eCommerce.Application.Features.Commands
 
             RuleFor(x => x.CategoryId)
                 .NotNull().WithMessage("is null")
-                .MustAsync(IsCategoryExist).WithMessage("does not exist");
+                .MustAsync(IsCategoryExist).WithMessage("does not exist or is removed");
 
             RuleFor(x => x.Price)
                 .NotNull().WithMessage("is null")
@@ -38,6 +38,6 @@ namespace eCommerce.Application.Features.Commands
            await _productRepository.IsUnique(x => x.Name == name, cancellationToken);
 
         private async Task<bool> IsCategoryExist(int categoryId, CancellationToken cancellationToken) =>
-             !await _categoryRepository.IsUnique(x => x.Id == categoryId, cancellationToken);
+             !await _categoryRepository.IsUnique(x => x.Id == categoryId && !x.IsRemoved, cancellationToken);
     }
 }

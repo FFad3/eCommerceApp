@@ -1,4 +1,5 @@
-﻿using eCommerce.Application.Features.Commands.ProductCommands;
+﻿using eCommerce.Application.DTOs.ProductDtos;
+using eCommerce.Application.Features.Commands.ProductCommands;
 using eCommerce.Application.Features.Queries.Common;
 using eCommerce.Domain.Entities;
 using MediatR;
@@ -30,7 +31,7 @@ namespace eCommerce.Api.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Get produucts page")]
-        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<Product> query)
+        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<ProductDto> query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);

@@ -15,5 +15,6 @@ namespace eCommerce.Application.Features.Commands.ProductCommands
 
         public decimal Price { get; set; }
         public string? Description { get; set; }
+        public string? ImgUrl { get; set; }
     }
 }
