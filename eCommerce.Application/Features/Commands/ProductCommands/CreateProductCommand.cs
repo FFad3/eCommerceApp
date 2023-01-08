@@ -3,12 +3,12 @@ using eCommerce.Domain.Entities;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace eCommerce.Application.Features.Commands
+namespace eCommerce.Application.Features.Commands.ProductCommands
 {
     public class CreateProductCommand : IRequest<int>, IMapTo<Product>
     {
         [Required]
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = default!;
 
         [Required]
         public int CategoryId { get; set; }

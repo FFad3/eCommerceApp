@@ -1,5 +1,4 @@
 ﻿using eCommerce.Application.Contracts.Persistence;
-using eCommerce.Application.Contracts.Persistence.Repositories;
 using FluentValidation;
 
 namespace eCommerce.Application.Features.Commands

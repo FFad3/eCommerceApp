@@ -7,7 +7,12 @@ namespace eCommerce.Domain.Entities
     [Table("Categories")]
     public class Category : EntityBase
     {
-        public string Name { get; set; } = null!;
-        public ICollection<Product> Products { get; set; } = null!;
+        public Category()
+        {
+            Products = new List<Product>();
+        }
+
+        public string Name { get; set; } = default!;
+        public ICollection<Product> Products { get; set; }
     }
 }

@@ -7,15 +7,14 @@ namespace eCommerce.Domain.Entities
     public class BasketItem : EntityBase
     {
         public int BastekId { get; set; }
-        public Basket Basket { get; set; } = null!;
+        public Basket Basket { get; set; } = default!;
 
         public int ProductId { get; set; }
-        public Product Product { get; set; } = null!;
-        public string ProductName { get; set; } = null!;
+        public Product Product { get; set; } = default!;
+        public string ProductName { get; set; } = default!;
 
         public Guid UserId { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-        public string? ImgUrl { get; set; }
     }
 }

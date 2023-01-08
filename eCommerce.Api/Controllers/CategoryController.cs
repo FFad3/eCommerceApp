@@ -1,12 +1,10 @@
 ﻿using eCommerce.Application.DTOs.CategoryDtos;
 using eCommerce.Application.Features.Commands;
 using eCommerce.Application.Features.Queries;
-using FluentValidation;
+using eCommerce.Application.Features.Queries.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel;
 
 namespace eCommerce.Api.Controllers
 {
@@ -35,7 +33,7 @@ namespace eCommerce.Api.Controllers
         [SwaggerOperation(Summary = "Get specific category with given Id")]
         public async Task<ActionResult> Get(int id)
         {
-            var query = new GetCategoryQuery { id = id };
+            var query = new GetCategoryQuery { Id = id };
             var result = await _mediator.Send(query);
             if (result is null)
             {
@@ -70,9 +68,9 @@ namespace eCommerce.Api.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Get paginated result")]
-        public async Task<ActionResult> Get([FromQuery] GetPaginationResult<CategoryDto> query)
+        public async Task<ActionResult> Get()
         {
-            var result = await _mediator.Send(query);
+            var result = await _mediator.Send(new GetCategoriesQuery());
             if (result is null)
             {
                 return NoContent();

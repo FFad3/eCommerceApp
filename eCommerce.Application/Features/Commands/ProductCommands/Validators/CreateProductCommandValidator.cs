@@ -1,5 +1,6 @@
 ﻿using eCommerce.Application.Contracts.Persistence;
 using eCommerce.Application.Contracts.Persistence.Repositories;
+using eCommerce.Application.Features.Commands.ProductCommands;
 using FluentValidation;
 
 namespace eCommerce.Application.Features.Commands
@@ -12,7 +13,7 @@ namespace eCommerce.Application.Features.Commands
 
         public CreateProductCommandValidator(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
             _categoryRepository = _unitOfWork.Category;
             _productRepository = _unitOfWork.Product;
 

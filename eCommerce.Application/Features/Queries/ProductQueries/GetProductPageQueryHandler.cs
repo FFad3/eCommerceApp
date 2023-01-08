@@ -3,6 +3,7 @@ using eCommerce.Application.Common.Extensions;
 using eCommerce.Application.Common.Mappings;
 using eCommerce.Application.Contracts.Persistence.Repositories;
 using eCommerce.Application.DTOs.Common;
+using eCommerce.Application.Features.Queries.Common;
 using eCommerce.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;

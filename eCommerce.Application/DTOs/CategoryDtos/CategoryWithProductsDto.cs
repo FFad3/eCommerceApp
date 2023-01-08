@@ -7,7 +7,7 @@ namespace eCommerce.Application.DTOs.CategoryDtos
     public class CategoryWithProductsDto : IMapFrom<Category>
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = default!;
         public IEnumerable<ProductDto> Products { get; set; } = new List<ProductDto>();
         public int ProductsCount { get; set; }
     }

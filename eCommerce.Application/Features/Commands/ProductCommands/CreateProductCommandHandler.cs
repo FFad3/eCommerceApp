@@ -5,7 +5,7 @@ using eCommerce.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace eCommerce.Application.Features.Commands
+namespace eCommerce.Application.Features.Commands.ProductCommands
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
     {

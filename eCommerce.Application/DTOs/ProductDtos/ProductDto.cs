@@ -6,7 +6,7 @@ namespace eCommerce.Application.DTOs.ProductDtos
     public class ProductDto : IMapFrom<Product>
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = default!;
 
         public decimal Price { get; set; }
 

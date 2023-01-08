@@ -21,7 +21,7 @@ namespace eCommerce.Application.Features.Queries
 
         public async Task<CategoryWithProductsDto?> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _repo.GetCategoryWithProductsAsync(x => x.Id == request.id, cancellationToken);
+            var entity = await _repo.GetCategoryWithProductsAsync(x => x.Id == request.Id, cancellationToken);
             var result = _mapper.Map<CategoryWithProductsDto>(entity);
             _logger.LogInformation("Get Category with Products {@payload}", result);
             return result;

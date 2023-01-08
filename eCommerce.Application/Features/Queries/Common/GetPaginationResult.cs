@@ -1,7 +1,8 @@
 ﻿using eCommerce.Application.DTOs.Common;
 using MediatR;
 
-namespace eCommerce.Application.Features.Queries
+namespace eCommerce.Application.Features.Queries.Common
+
 {
     public class GetPaginationResult<T> : IRequest<PaginatedList<T>> where T : class
     {

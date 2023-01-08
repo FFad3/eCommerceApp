@@ -1,5 +1,5 @@
-﻿using eCommerce.Application.Features.Commands;
-using eCommerce.Application.Features.Queries;
+﻿using eCommerce.Application.Features.Commands.ProductCommands;
+using eCommerce.Application.Features.Queries.Common;
 using eCommerce.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

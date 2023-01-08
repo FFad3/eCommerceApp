@@ -5,9 +5,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace eCommerce.Application.Features.Commands
 {
-    public class CreateCategoryCommand : IRequest<int>, IMapTo<Category>
+    public class UpdateCategoryCommand : IRequest<int?>, IMapTo<Category>
     {
         [Required]
-        public string Name { get; set; } = null!;
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; } = default!;
     }
 }
